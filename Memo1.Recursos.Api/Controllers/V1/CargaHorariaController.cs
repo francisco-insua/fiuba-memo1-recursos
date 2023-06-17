@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Memo1.Recursos.API.Controllers.V1;
 
-[Route("api/v1/cargahoraria")]
+[Route("api/v1/carga-horaria")]
 [ApiController]
 public class CargaHorariaController : Controller
 {
