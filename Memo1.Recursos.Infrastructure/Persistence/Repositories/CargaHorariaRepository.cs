@@ -1,4 +1,5 @@
-﻿using Memo1.Recursos.Application.Contracts.Repositories;
+﻿using LinqKit;
+using Memo1.Recursos.Application.Contracts.Repositories;
 using Memo1.Recursos.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,9 +35,45 @@ public class CargaHorariaRepository : ICargaHorariaRepository
     public async Task<CargaHoraria?> GetCargaHoraria(string legajo)
     {
         return await _context.Cargahorarias
-            .Where(x => x.legajo == legajo)
+            .Where(x => x.Legajo == legajo)
             .AsNoTracking()
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<List<CargaHoraria>> GetWithFilters(string legajo, string proyecto, string tarea)
+    {
+        var filters = PredicateBuilder.New<CargaHoraria>();
+        var filtered = false;
+        
+        if (!string.IsNullOrEmpty(legajo))  
+        {  
+            filters = filters.And(x => x.Legajo == legajo);
+            filtered = true;
+        } 
+        
+        if (!string.IsNullOrEmpty(proyecto))  
+        {  
+            filters = filters.And(x => x.ProyectoId == proyecto);
+            filtered = true;
+        }
+        
+        if (!string.IsNullOrEmpty(tarea))  
+        {  
+            filters = filters.And(x => x.TareaId == tarea);
+            filtered = true;
+        }
+        
+        if (!filtered)
+        {
+            return await _context.Cargahorarias
+                .AsNoTracking()
+                .ToListAsync();
+        } 
+        
+        return await _context.Cargahorarias
+            .Where(filters)
+            .AsNoTracking()
+            .ToListAsync();
     }
 
 }

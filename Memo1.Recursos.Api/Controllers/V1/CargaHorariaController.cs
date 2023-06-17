@@ -13,9 +13,9 @@ public class CargaHorariaController : Controller
 
     private readonly ICargaHorariaService _cargaHorariaService;
 
-    public CargaHorariaController(ICargaHorariaService commentService)
+    public CargaHorariaController(ICargaHorariaService cargaHorariaService)
     {
-        _cargaHorariaService = commentService;
+        _cargaHorariaService = cargaHorariaService;
     }
     
     [HttpPost]
@@ -38,13 +38,15 @@ public class CargaHorariaController : Controller
     
     
     /*Obtiene horas cargadas por legajo de recurso*/
-    [HttpGet(template: "{legajo}")]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CargaHorariaDto>> getCargaHoraria(string legajo)
+    public async Task<ActionResult<List<CargaHorariaDto>>> GetCargasHorarias(
+        [FromQuery] string legajo = "",
+        [FromQuery] string proyecto = "",
+        [FromQuery] string tarea = "") 
     {
-        var horas = await _cargaHorariaService.GetCargaHoraria(legajo);
-        return horas is not null ? Ok(horas) : NotFound(legajo);
+        return await _cargaHorariaService.GetCargaHoraria(legajo, proyecto, tarea);
     }
     
     /*Obtiene horas cargadas por id de tarea

@@ -7,4 +7,5 @@ public interface ICargaHorariaRepository
     Task Add(CargaHoraria cargaHoraria);
     Task Delete(string id);
     Task<CargaHoraria?> GetCargaHoraria(string legajo);
+    Task<List<CargaHoraria>> GetWithFilters(string legajo, string proyecto, string tarea);
 }

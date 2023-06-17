@@ -10,12 +10,10 @@ public class CargaHorariaConfiguration : IEntityTypeConfiguration<CargaHoraria>
     {
         builder.ToTable("tbl_carga_horaria").HasKey(x => x.Id);
         builder.Property(t => t.Id).HasColumnName("id");
-        builder.Property(t => t.legajo).HasColumnName("legajo");
-        builder.Property(t => t.nombre).HasColumnName("nombre");
-        builder.Property(t => t.apellido).HasColumnName("apellido");
-        builder.Property(t => t.proyecto).HasColumnName("proyecto");
-        builder.Property(t => t.tarea).HasColumnName("tarea");
-        builder.Property(t => t.fecha).HasColumnName("fecha");
-        builder.Property(t => t.horas).HasColumnName("horas");
+        builder.Property(t => t.Legajo).HasColumnName("legajo");
+        builder.Property(t => t.ProyectoId).HasColumnName("proyecto");
+        builder.Property(t => t.TareaId).HasColumnName("tarea");
+        builder.Property(t => t.Fecha).HasColumnName("fecha");
+        builder.Property(t => t.Horas).HasColumnName("horas");
     }
 }

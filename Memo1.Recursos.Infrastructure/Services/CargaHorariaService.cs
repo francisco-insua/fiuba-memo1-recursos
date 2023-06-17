@@ -26,14 +26,9 @@ public class CargaHorariaService: ICargaHorariaService
         {
             var cargaHoraria = _mapper.Map<CargaHoraria>(createCargaHorariaDto);
             cargaHoraria.Id = Guid.NewGuid().ToString();
-            cargaHoraria.apellido = createCargaHorariaDto.apellido;
-            cargaHoraria.nombre = createCargaHorariaDto.nombre;
-            cargaHoraria.proyecto = createCargaHorariaDto.proyecto;
-            cargaHoraria.tarea = createCargaHorariaDto.tarea;
-            cargaHoraria.fecha = createCargaHorariaDto.fecha;
-            cargaHoraria.horas = createCargaHorariaDto.horas;
+            
             await _cargaHorariaRepository.Add(cargaHoraria);
-
+            
             return new BaseResponse(true, cargaHoraria.Id);
         }
         catch (Exception e)
@@ -61,5 +56,15 @@ public class CargaHorariaService: ICargaHorariaService
     {
         var horas = await _cargaHorariaRepository.GetCargaHoraria(legajo);
         return horas is not null ? _mapper.Map<CargaHorariaDto>(horas) : null;
+    }
+
+    public async Task<List<CargaHorariaDto>> GetCargaHoraria(string legajo, string proyecto, string tarea)
+    {
+        var cargasHorarias = await _cargaHorariaRepository.GetWithFilters(
+            legajo,
+            proyecto,
+            tarea);
+        
+        return _mapper.Map<List<CargaHorariaDto>>(cargasHorarias);
     }
 }
