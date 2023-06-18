@@ -67,4 +67,44 @@ public class CargaHorariaService: ICargaHorariaService
         
         return _mapper.Map<List<CargaHorariaDto>>(cargasHorarias);
     }
+
+    public async Task<BaseResponse> UpdateCargaHoraria(UpdateCargaHorariaDto updateDto)
+    {
+        try
+        {
+            
+            var cargaHorariaById = await _cargaHorariaRepository.GetById(updateDto.Id!);
+            
+            if (cargaHorariaById is null)
+            {
+                return new BaseResponse(false,updateDto.Id!,"NOT FOUND");
+            }
+            var cargaHorariaToUpdate = _mapper.Map<CargaHoraria>(updateDto);
+
+            if (string.IsNullOrEmpty(cargaHorariaToUpdate.Legajo))
+            {
+                cargaHorariaToUpdate.Legajo = cargaHorariaById.Legajo;
+            }
+            if (string.IsNullOrEmpty(cargaHorariaToUpdate.ProyectoId))
+            {
+                cargaHorariaToUpdate.ProyectoId = cargaHorariaById.ProyectoId;
+            }
+            if (string.IsNullOrEmpty(cargaHorariaToUpdate.TareaId))
+            {
+                cargaHorariaToUpdate.TareaId = cargaHorariaById.TareaId;
+            }
+            
+            if (cargaHorariaToUpdate.Horas == 0)
+            {
+                cargaHorariaToUpdate.Horas = cargaHorariaById.Horas;
+            }
+            
+            await _cargaHorariaRepository.Update(cargaHorariaToUpdate);
+            return new BaseResponse(true, updateDto.Id!);
+        }
+        catch (Exception e)
+        {
+            return new BaseResponse(true, updateDto.Id!);
+        }
+    }
 }

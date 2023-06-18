@@ -10,6 +10,7 @@ public class AutoMapperProfile : Profile
     {
         CreateMap<CreateCargaHorariaDto, CargaHoraria>();
         CreateMap<CargaHorariaDto, CargaHoraria>().ReverseMap();
+        CreateMap<UpdateCargaHorariaDto, CargaHoraria>();
     }
 }
     
