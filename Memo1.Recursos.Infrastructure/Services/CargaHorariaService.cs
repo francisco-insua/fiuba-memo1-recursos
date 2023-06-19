@@ -72,12 +72,6 @@ public class CargaHorariaService: ICargaHorariaService
     {
         try
         {
-
-            if (updateDto.Fecha is null)
-            {
-                
-            }
-            
             var cargaHorariaById = await _cargaHorariaRepository.GetById(updateDto.Id!);
             
             if (cargaHorariaById is null)
