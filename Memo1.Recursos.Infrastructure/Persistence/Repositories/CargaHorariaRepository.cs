@@ -75,5 +75,18 @@ public class CargaHorariaRepository : ICargaHorariaRepository
             .AsNoTracking()
             .ToListAsync();
     }
+    
+    public async Task<CargaHoraria?> GetById(string id)
+    {
+        return await _context.Cargahorarias
+            .Where(x => x.Id == id)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
+    }
 
+    public async Task Update(CargaHoraria cargaHoraria)
+    {
+        _context.Update(cargaHoraria);
+        await _context.SaveChangesAsync();
+    }
 }

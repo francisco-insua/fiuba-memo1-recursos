@@ -60,4 +60,13 @@ public class CargaHorariaController : Controller
     }
     
     */
+
+    [HttpPut]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BaseResponse>> UpdateCargaHoraria([FromBody] UpdateCargaHorariaDto updateDto)
+    {
+        var response =  await _cargaHorariaService.UpdateCargaHoraria(updateDto);
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
 }
