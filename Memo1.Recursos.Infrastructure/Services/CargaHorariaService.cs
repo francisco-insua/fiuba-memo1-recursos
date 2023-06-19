@@ -72,6 +72,11 @@ public class CargaHorariaService: ICargaHorariaService
     {
         try
         {
+
+            if (updateDto.Fecha is null)
+            {
+                
+            }
             
             var cargaHorariaById = await _cargaHorariaRepository.GetById(updateDto.Id!);
             
@@ -92,6 +97,11 @@ public class CargaHorariaService: ICargaHorariaService
             if (string.IsNullOrEmpty(cargaHorariaToUpdate.TareaId))
             {
                 cargaHorariaToUpdate.TareaId = cargaHorariaById.TareaId;
+            }
+            
+            if (cargaHorariaToUpdate.Fecha is null)
+            {
+                cargaHorariaToUpdate.Fecha = cargaHorariaById.Fecha;
             }
             
             if (cargaHorariaToUpdate.Horas == 0)

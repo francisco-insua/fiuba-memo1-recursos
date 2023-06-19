@@ -15,10 +15,8 @@ public class UpdateCargaHorariaDto
     
     public string TareaId { get; set; }
     
-    [Required(ErrorMessage = "The field is required")]
     public DateOnly? Fecha { get; set; }
     
     [DefaultValue(0)]
     public int Horas { get; set; }
-    
 }
