@@ -15,5 +15,6 @@ public class CargaHorariaConfiguration : IEntityTypeConfiguration<CargaHoraria>
         builder.Property(t => t.TareaId).HasColumnName("tarea");
         builder.Property(t => t.Fecha).HasColumnName("fecha");
         builder.Property(t => t.Horas).HasColumnName("horas");
+        builder.Property(t => t.Descripcion).HasColumnName("descripcion");
     }
 }

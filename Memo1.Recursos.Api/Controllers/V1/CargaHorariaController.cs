@@ -36,30 +36,26 @@ public class CargaHorariaController : Controller
         return response.Success ? Ok(response) : BadRequest(response);
     }
     
+    [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<CargaHorariaDto>> GetCargasHorariasById(string id) 
+    {
+        var cargaHoraria = await _cargaHorariaService.GetCargaHoraria(id);
+        return cargaHoraria is not null ? Ok(cargaHoraria) : NotFound(id);
+    }
     
-    /*Obtiene horas cargadas por legajo de recurso*/
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<List<CargaHorariaDto>>> GetCargasHorarias(
+    public async Task<ActionResult<List<CargaHorariaDto>>> GetCargasHorariasConFiltros(
         [FromQuery] string legajo = "",
         [FromQuery] string proyecto = "",
         [FromQuery] string tarea = "") 
     {
         return await _cargaHorariaService.GetCargaHoraria(legajo, proyecto, tarea);
     }
-    
-    /*Obtiene horas cargadas por id de tarea
-    [HttpGet(template: "{tarea}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<CargaHorariaDto>> getCargaHoraria(string tarea)
-    {
-        var horas = await _cargaHorariaService.GetCargaHoraria(tarea);
-        return horas is not null ? Ok(horas) : NotFound(tarea);
-    }
-    
-    */
 
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]

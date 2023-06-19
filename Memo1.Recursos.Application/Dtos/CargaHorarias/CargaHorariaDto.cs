@@ -8,4 +8,5 @@ public class CargaHorariaDto
     public string TareaId { get; set; }
     public DateOnly Fecha { get; set; }
     public int Horas { get; set; }
+    public string Descripcion { get; set; }
 }

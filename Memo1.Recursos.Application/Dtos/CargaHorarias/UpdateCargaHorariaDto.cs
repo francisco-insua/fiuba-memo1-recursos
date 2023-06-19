@@ -19,4 +19,5 @@ public class UpdateCargaHorariaDto
     
     [DefaultValue(0)]
     public int Horas { get; set; }
+    public string Descripcion { get; set; }
 }

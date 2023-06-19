@@ -32,10 +32,10 @@ public class CargaHorariaRepository : ICargaHorariaRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<CargaHoraria?> GetCargaHoraria(string legajo)
+    public async Task<CargaHoraria?> GetCargaHoraria(string id)
     {
         return await _context.Cargahorarias
-            .Where(x => x.Legajo == legajo)
+            .Where(x => x.Id == id)
             .AsNoTracking()
             .FirstOrDefaultAsync();
     }

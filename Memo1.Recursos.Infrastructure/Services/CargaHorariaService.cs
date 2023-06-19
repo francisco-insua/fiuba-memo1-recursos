@@ -52,10 +52,10 @@ public class CargaHorariaService: ICargaHorariaService
         }
     }
 
-    public async Task<CargaHorariaDto?> GetCargaHoraria(string legajo)
+    public async Task<CargaHorariaDto> GetCargaHoraria(string id)
     {
-        var horas = await _cargaHorariaRepository.GetCargaHoraria(legajo);
-        return horas is not null ? _mapper.Map<CargaHorariaDto>(horas) : null;
+        var cargaHoraria = await _cargaHorariaRepository.GetCargaHoraria(id);
+        return _mapper.Map<CargaHorariaDto>(cargaHoraria);
     }
 
     public async Task<List<CargaHorariaDto>> GetCargaHoraria(string legajo, string proyecto, string tarea)
