@@ -58,7 +58,7 @@ public class CargaHorariaService: ICargaHorariaService
         return _mapper.Map<CargaHorariaDto>(cargaHoraria);
     }
 
-    public async Task<List<CargaHorariaDto>> GetCargaHoraria(string legajo, string proyecto, string tarea)
+    public async Task<List<CargaHorariaDto>> GetCargaHoraria(int? legajo, string proyecto, string tarea)
     {
         var cargasHorarias = await _cargaHorariaRepository.GetWithFilters(
             legajo,
@@ -80,7 +80,7 @@ public class CargaHorariaService: ICargaHorariaService
             }
             var cargaHorariaToUpdate = _mapper.Map<CargaHoraria>(updateDto);
 
-            if (string.IsNullOrEmpty(cargaHorariaToUpdate.Legajo))
+            if (cargaHorariaToUpdate.Legajo == null)
             {
                 cargaHorariaToUpdate.Legajo = cargaHorariaById.Legajo;
             }
@@ -101,6 +101,11 @@ public class CargaHorariaService: ICargaHorariaService
             if (cargaHorariaToUpdate.Horas == 0)
             {
                 cargaHorariaToUpdate.Horas = cargaHorariaById.Horas;
+            }
+            
+            if (string.IsNullOrEmpty(cargaHorariaToUpdate.Descripcion))
+            {
+                cargaHorariaToUpdate.Descripcion = cargaHorariaById.Descripcion;
             }
             
             await _cargaHorariaRepository.Update(cargaHorariaToUpdate);

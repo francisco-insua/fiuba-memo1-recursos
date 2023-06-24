@@ -2,7 +2,7 @@
 
 public class CreateCargaHorariaDto
 {
-    public string Legajo { get; set; }
+    public int Legajo { get; set; }
     public string ProyectoId { get; set; }
     public string TareaId { get; set; }
     public DateOnly Fecha { get; set; }

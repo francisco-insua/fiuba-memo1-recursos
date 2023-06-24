@@ -1,7 +1,6 @@
 ﻿using Memo1.Recursos.Application.Contracts.Services;
 using Memo1.Recursos.Application.Dtos.CargaHorarias;
 using Memo1.Recursos.Application.Responses;
-using Memo1.Recursos.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Memo1.Recursos.API.Controllers.V1;
@@ -50,7 +49,7 @@ public class CargaHorariaController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<List<CargaHorariaDto>>> GetCargasHorariasConFiltros(
-        [FromQuery] string legajo = "",
+        [FromQuery] int? legajo = null,
         [FromQuery] string proyecto = "",
         [FromQuery] string tarea = "") 
     {

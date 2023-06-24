@@ -9,7 +9,7 @@ public class UpdateCargaHorariaDto
     [Required(ErrorMessage = "The field is required")]
     public string? Id { get; set; }
 
-    public string Legajo { get; set; }
+    public int? Legajo { get; set; }
    
     public string ProyectoId { get; set; }
     

@@ -40,12 +40,12 @@ public class CargaHorariaRepository : ICargaHorariaRepository
             .FirstOrDefaultAsync();
     }
 
-    public async Task<List<CargaHoraria>> GetWithFilters(string legajo, string proyecto, string tarea)
+    public async Task<List<CargaHoraria>> GetWithFilters(int? legajo, string proyecto, string tarea)
     {
         var filters = PredicateBuilder.New<CargaHoraria>();
         var filtered = false;
         
-        if (!string.IsNullOrEmpty(legajo))  
+        if (legajo != null)  
         {  
             filters = filters.And(x => x.Legajo == legajo);
             filtered = true;
